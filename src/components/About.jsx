@@ -224,7 +224,25 @@ export default function About() {
         @media (max-width: 768px) {
           .about-grid {
             grid-template-columns: 1fr;
-            gap: 50px;
+            gap: 36px;
+          }
+          .block-subtitle {
+            font-size: 1.4rem;
+          }
+          .block-text {
+            font-size: 0.95rem;
+          }
+          .stat-value {
+            font-size: 2rem;
+          }
+          .stat-card {
+            padding: 20px 12px;
+          }
+          .quote-text {
+            font-size: 1rem;
+          }
+          .quote-box {
+            padding: 24px 20px;
           }
         }
       `}</style>

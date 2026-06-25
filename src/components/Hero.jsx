@@ -266,13 +266,13 @@ export default function Hero() {
 
         @media (max-width: 768px) {
           .hero-section {
-            padding-top: 100px;
+            padding-top: 90px;
             padding-bottom: 40px;
           }
           .hero-grid {
             grid-template-columns: 1fr;
             text-align: center;
-            gap: 40px;
+            gap: 28px;
           }
           .hero-content {
             text-align: center;
@@ -282,21 +282,50 @@ export default function Hero() {
             order: 1;
           }
           .profile-frame {
-            width: 240px;
-            height: 240px;
+            width: 200px;
+            height: 200px;
+          }
+          .hero-title {
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+          }
+          .title-suffix {
+            font-size: 1.1rem;
+            padding: 2px 8px;
+            margin-left: 6px;
+          }
+          .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 16px;
           }
           .hero-description {
+            font-size: 0.95rem;
+            margin-bottom: 24px;
             margin-left: auto;
             margin-right: auto;
           }
           .contact-info-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
             justify-items: center;
+            margin-bottom: 24px;
           }
           .hero-actions {
             justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
           }
           .scroll-indicator-container {
             display: none;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .hero-title {
+            font-size: 1.9rem;
+          }
+          .hero-subtitle {
+            font-size: 1.1rem;
           }
         }
       `}</style>

@@ -63,6 +63,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
 }
 
 body {
@@ -120,6 +121,27 @@ a {
 @media (max-width: 768px) {
   .section-padding {
     padding: 60px 0;
+  }
+  .container {
+    padding: 0 16px;
+  }
+  .section-title {
+    font-size: 2rem !important;
+  }
+  .section-title-wrapper {
+    margin-bottom: 40px !important;
+  }
+  .premium-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .section-title {
+    font-size: 1.7rem !important;
+  }
+  .container {
+    padding: 0 12px;
   }
 }
 

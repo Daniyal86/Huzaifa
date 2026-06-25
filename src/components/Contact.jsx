@@ -471,20 +471,33 @@ export default function Contact() {
         @media (max-width: 768px) {
           .contact-grid {
             grid-template-columns: 1fr;
+            gap: 0;
+          }
+          .contact-details-card {
+            padding: 28px 20px;
+            border-radius: var(--radius-md) var(--radius-md) 0 0;
+            border-bottom: none;
+          }
+          .contact-form-card {
+            padding: 28px 20px;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
           }
           .form-group-row {
             grid-template-columns: 1fr;
-            gap: 20px;
-          }
-        }
-
-        @media (max-width: 576px) {
-          .contact-details-card, .contact-form-card {
-            padding: 24px;
+            gap: 16px;
           }
           .submit-btn {
             width: 100%;
             justify-content: center;
+          }
+          .card-title-main, .form-title {
+            font-size: 1.3rem;
+          }
+          .details-list {
+            gap: 18px;
+          }
+          .social-links {
+            flex-wrap: wrap;
           }
         }
       `}</style>

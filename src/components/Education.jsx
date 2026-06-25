@@ -261,13 +261,20 @@ export default function Education() {
         @media (max-width: 576px) {
           .education-card {
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
+            padding: 16px;
           }
           .project-card {
-            padding: 24px;
+            padding: 20px 16px;
           }
           .project-topic {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
+          }
+          .project-title {
+            font-size: 1.3rem;
+          }
+          .highlight-point p {
+            font-size: 0.9rem;
           }
         }
       `}</style>

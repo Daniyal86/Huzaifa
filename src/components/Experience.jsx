@@ -294,12 +294,12 @@ export default function Experience() {
 
         @media (max-width: 900px) {
           .timeline-line {
-            left: 24px;
+            left: 20px;
           }
 
           .timeline-item {
             width: 100%;
-            padding: 20px 20px 20px 60px;
+            padding: 16px 16px 16px 52px;
             justify-content: flex-start;
           }
 
@@ -314,12 +314,32 @@ export default function Experience() {
 
           .item-right .timeline-node,
           .item-left .timeline-node {
-            left: 6px;
+            left: 2px;
             right: auto;
+            width: 32px;
+            height: 32px;
           }
 
           .timeline-card {
             max-width: 100%;
+            padding: 20px 16px;
+          }
+
+          .card-hospital {
+            font-size: 1.05rem;
+          }
+
+          .card-role {
+            font-size: 0.88rem;
+          }
+
+          .card-details-list li {
+            font-size: 0.85rem;
+          }
+
+          .card-date {
+            font-size: 0.8rem;
+            padding: 3px 10px;
           }
         }
       `}</style>
