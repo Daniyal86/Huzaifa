@@ -131,7 +131,7 @@ export default function Calculators() {
     adultDose: '',
     ageYears: '',
     ageMonths: '',
-    weightLbs: ''
+    weightKg: ''  // User enters kg; formula converts to lbs internally
   });
 
   const handlePdChange = (e) => {
@@ -140,19 +140,21 @@ export default function Calculators() {
   };
 
   const resetPd = () => {
-    setPdInputs({ adultDose: '', ageYears: '', ageMonths: '', weightLbs: '' });
+    setPdInputs({ adultDose: '', ageYears: '', ageMonths: '', weightKg: '' });
   };
 
   const calculatePd = () => {
     const adult = parseFloat(pdInputs.adultDose);
     const ageY = parseFloat(pdInputs.ageYears);
     const ageM = parseFloat(pdInputs.ageMonths);
-    const wtLbs = parseFloat(pdInputs.weightLbs);
+    const wtKg = parseFloat(pdInputs.weightKg);
+    // Clark's Rule requires weight in lbs — convert kg → lbs automatically
+    const wtLbs = wtKg * 2.2046;
     const results = {};
     if (adult > 0 && !isNaN(ageY) && ageY >= 1 && ageY <= 12) {
       results.youngs = ((ageY / (ageY + 12)) * adult).toFixed(2);
     }
-    if (adult > 0 && !isNaN(wtLbs) && wtLbs > 0) {
+    if (adult > 0 && !isNaN(wtKg) && wtKg > 0) {
       results.clarks = ((wtLbs / 150) * adult).toFixed(2);
     }
     if (adult > 0 && !isNaN(ageM) && ageM > 0 && ageM < 12) {
@@ -167,7 +169,7 @@ export default function Calculators() {
   const [bmiUnit, setBmiUnit] = useState('metric');
   const [bmiInputs, setBmiInputs] = useState({
     weightKg: '', heightCm: '',
-    weightLbs: '', heightFt: '', heightIn: ''
+    weightKgImperial: '', heightFt: '', heightIn: '' // Imperial also takes kg, converts to lbs internally
   });
 
   const handleBmiChange = (e) => {
@@ -176,7 +178,7 @@ export default function Calculators() {
   };
 
   const resetBmi = () => {
-    setBmiInputs({ weightKg: '', heightCm: '', weightLbs: '', heightFt: '', heightIn: '' });
+    setBmiInputs({ weightKg: '', heightCm: '', weightKgImperial: '', heightFt: '', heightIn: '' });
   };
 
   const calculateBmi = () => {
@@ -189,11 +191,13 @@ export default function Calculators() {
         bmi = wKg / (hM * hM);
       }
     } else {
-      const wLbs = parseFloat(bmiInputs.weightLbs);
+      const wKgImp = parseFloat(bmiInputs.weightKgImperial);
+      // Imperial BMI formula uses lbs — auto-convert kg → lbs
+      const wLbs = wKgImp * 2.2046;
       const ft = parseFloat(bmiInputs.heightFt) || 0;
       const inch = parseFloat(bmiInputs.heightIn) || 0;
       const totalIn = ft * 12 + inch;
-      if (wLbs > 0 && totalIn > 0) {
+      if (wKgImp > 0 && totalIn > 0) {
         bmi = (703 * wLbs) / (totalIn * totalIn);
       }
     }
@@ -517,13 +521,13 @@ export default function Calculators() {
                       />
                     </div>
                     <div className="input-group">
-                      <label>Weight (lbs)</label>
+                      <label>Weight (kg) <span style={{fontSize:'0.75em', opacity:0.65, fontWeight:400}}>→ auto-converts to lbs for Clark's Rule</span></label>
                       <input
                         type="number"
-                        name="weightLbs"
-                        value={pdInputs.weightLbs}
+                        name="weightKg"
+                        value={pdInputs.weightKg}
                         onChange={handlePdChange}
-                        placeholder="e.g., 44"
+                        placeholder="e.g., 20"
                       />
                     </div>
                   </div>
@@ -570,7 +574,7 @@ export default function Calculators() {
                       <div className="pd-formula">
                         <span className="formula-text">
                           Child Dose = <span className="formula-fraction">
-                            <span className="numerator">Weight (lbs)</span>
+                            <span className="numerator">Weight (kg × 2.2046)</span>
                             <span className="denominator">150</span>
                           </span> × Adult Dose
                         </span>
@@ -581,7 +585,7 @@ export default function Calculators() {
                           <span className="pd-unit">mg</span>
                         </div>
                       ) : (
-                        <div className="pd-empty">Enter adult dose &amp; weight (lbs)</div>
+                        <div className="pd-empty">Enter adult dose &amp; weight (kg)</div>
                       )}
                     </div>
 
@@ -651,9 +655,9 @@ export default function Calculators() {
                   ) : (
                     <div className="cg-inputs-grid">
                       <div className="input-group">
-                        <label>Weight (lbs)</label>
-                        <input type="number" name="weightLbs" value={bmiInputs.weightLbs}
-                          onChange={handleBmiChange} placeholder="e.g., 154" />
+                        <label>Weight (kg) <span style={{fontSize:'0.75em', opacity:0.65, fontWeight:400}}>→ auto-converts to lbs</span></label>
+                        <input type="number" name="weightKgImperial" value={bmiInputs.weightKgImperial}
+                          onChange={handleBmiChange} placeholder="e.g., 70" />
                       </div>
                       <div className="input-group">
                         <label>Height — Feet</label>
