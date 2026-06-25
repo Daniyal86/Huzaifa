@@ -1,0 +1,1035 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('autocomplete.css');
+
+:root {
+    /* --- HYBRID THEME: LIGHT CONTENT / DARK NAV --- */
+
+    /* DEFAULT (LIGHT) */
+    --bg-body: #f4f6f8;
+    --bg-card: #ffffff;
+    --bg-input: #ffffff;
+    --bg-hover: #f0f0f0;
+
+    --text-main: #1f2937;
+    /* Dark Gray for text */
+    --text-muted: #6b7280;
+    --text-dark: #111111;
+
+    --border-subtle: #e5e7eb;
+    --border-gold: #d4af37;
+    /* Keep gold available */
+
+    --primary-color: #D4AF37;
+    /* Gold branding remains */
+    --primary-hover: #bfa13f;
+    --secondary-color: #64748b;
+
+    /* Status */
+    --success-color: #059669;
+    --danger-color: #DC2626;
+    --warning-color: #D97706;
+
+    /* UI Defaults */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+
+    --font-family: 'Inter', sans-serif;
+    --font-heading: 'Playfair Display', serif;
+}
+
+
+/* --- DARK THEME OVERRIDES (Sidebar / Navbar) --- */
+.sidebar,
+.top-bar {
+    /* Re-map variables locally for Dark sections */
+    --bg-body: #050505;
+    --bg-card: #141414;
+    --bg-input: #0a0a0a;
+    --bg-hover: #1f1f1f;
+    --text-main: #FFFFFF;
+    --text-muted: #9CA3AF;
+    --border-subtle: #333333;
+
+    background-color: #0a0a0a !important;
+    color: #ffffff !important;
+    border-color: #333 !important;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- LAYOUT --- */
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.sidebar-header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-header h2 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px 15px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover {
+    color: var(--text-main);
+    background: var(--bg-hover);
+}
+
+.nav-item.active {
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.nav-item i {
+    margin-right: 15px;
+    width: 22px;
+    text-align: center;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg-body);
+}
+
+.top-bar {
+    height: 80px;
+    background-color: var(--bg-sidebar);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--text-main);
+}
+
+.content-wrapper {
+    /* user-select removed to allow text selection */
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+}
+
+/* --- CARDS --- */
+/* --- CARDS (High Contrast Premium) --- */
+.card,
+.admin-chart-section {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    /* Clear Gold Outline */
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+    transform: translateY(-2px);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+
+.card-title {
+    color: #374151;
+    /* Charcoal Gray (High Contrast) */
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.card-value {
+    color: #000000;
+    /* Pure Black */
+    font-size: 2.4rem;
+    font-weight: 800;
+    font-family: var(--font-family);
+    line-height: 1;
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+}
+
+.card-icon-premium {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    opacity: 1;
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
+}
+
+/* Specific overrides */
+.admin-chart-section {
+    padding: 25px;
+    align-items: stretch;
+}
+
+.input-premium {
+    border: none;
+    border-bottom: 2px solid var(--border-subtle);
+    background: transparent;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: #000000;
+    width: 90px;
+    transition: border-color 0.2s;
+}
+
+.input-premium:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* --- TABLES --- */
+.table-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #0f0f0f;
+    color: var(--primary-color);
+    padding: 18px 25px;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+.table td {
+    padding: 18px 25px;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.table tbody tr:hover td {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+/* --- BUTTONS --- */
+.btn {
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    background: transparent;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.btn-secondary {
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-muted);
+    background: var(--bg-hover);
+}
+
+/* --- FORMS --- */
+input,
+select,
+textarea {
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+}
+
+/* --- MODALS (General Override) --- */
+/* We will rely on inline styles for the specific modals, 
+   but this handles generic elements if any */
+
+/* --- CHART STYLES (Premium & Fixed Layout) --- */
+.admin-chart-section {
+    position: relative;
+    padding: 30px;
+    /* More padding */
+    height: 420px;
+    /* Ensure container has height */
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-legend-container {
+    display: flex;
+    align-items: center;
+}
+
+.chart-legend-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    opacity: 0.6;
+    transition: all 0.2s;
+    margin-left: 20px;
+}
+
+.chart-legend-btn.active {
+    opacity: 1;
+    font-weight: 700;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Chart Layout Container */
+.chart-body {
+    height: 300px;
+    /* Fixed height for bars area */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+    width: 100%;
+}
+
+.y-axis-title {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-align: center;
+    height: 100%;
+    margin-right: 20px;
+    white-space: nowrap;
+}
+
+/* The Flex Container for Months */
+.chart-display-area {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    /* FORCE ROW */
+    flex-wrap: nowrap;
+    /* PREVENT WRAPPING */
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Individual Month Group */
+.month-group {
+    flex: 1 1 0;
+    /* Grow, Shrink, Start from 0 width */
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    /* Space between bars in a month */
+    position: relative;
+    padding-bottom: 5px;
+    /* Space from bottom line */
+}
+
+.month-group:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+/* Bar Group (Label + Bar) */
+.bar-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    width: 24px;
+    /* Container width matches bar width */
+}
+
+/* The actual colored bar */
+.chart-bar {
+    width: 14px;
+    /* ELEGANT THIN BARS */
+    min-height: 2px;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Value Float */
+.bar-value {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+    color: var(--text-dark);
+    /* Ensure visibility */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+}
+
+.month-group:hover .bar-value {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.month-label {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    /* Medium Gray */
+}
+
+/* Hide Utility */
+.hide-inward .bar-group.inward,
+.hide-completed .bar-group.completed,
+.hide-pending .bar-group.pending {
+    display: none !important;
+}
+
+/* --- ONENOTE OVERRIDES (Light / Paper Mode) --- */
+.onenote-page {
+    background: #ffffff;
+    color: var(--text-dark);
+    /* Ensure dark text */
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.onenote-page::before {
+    display: none;
+}
+
+.onenote-title {
+    color: var(--primary-color);
+    border-bottom-color: var(--border-gold);
+}
+
+.onenote-border-table,
+.onenote-data-table,
+.onenote-table-container {
+    width: 60%;
+    /* Occupy 60% of page width */
+    max-width: 900px;
+    border-collapse: collapse;
+    margin: 0 auto 30px auto;
+    /* Center horizontally with bottom spacing */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    /* Subtle lift */
+}
+
+.onenote-border-table td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    border: 1px solid var(--border-subtle);
+    height: 50px;
+}
+
+/* Center the Section Headers */
+.onenote-section-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--border-gold);
+    padding-bottom: 10px;
+    display: inline-block;
+    /* Allow border to match text width or use width fit-content */
+    width: 100%;
+}
+
+.onenote-border-table .label-col {
+    background: #f9fafb;
+    color: #374151;
+    font-weight: 600;
+    width: 30%;
+    /* Slightly wider for better text fit */
+    white-space: nowrap;
+    text-align: center;
+    /* CENTER ALIGN LABELS as requested */
+}
+
+/* Clear Inputs & Selects */
+.onenote-border-table input,
+.onenote-border-table select {
+    width: 100%;
+    height: 100%;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #000000;
+    padding: 0 10px;
+}
+
+/* Fix for Area flex containers */
+.onenote-border-table div[style*="display:flex"] {
+    width: 100%;
+    height: 100%;
+}
+
+.onenote-border-table select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23d4af37" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.onenote-border-table input::placeholder {
+    color: #9ca3af;
+    opacity: 0.7;
+}
+
+.onenote-border-table input:focus,
+.onenote-border-table select:focus {
+    background: rgba(212, 175, 55, 0.05) !important;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* --- ONENOTE COMPONENTS --- */
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-container {
+    margin-bottom: 50px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.onenote-section-title {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 25px;
+    font-size: 1.25rem;
+    position: relative;
+    display: inline-block;
+}
+
+.onenote-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.onenote-table-container {
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+}
+
+.onenote-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.onenote-data-table th {
+    background: #f8fafc;
+    color: var(--primary-color);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 12px 15px;
+    border-bottom: 1.5px solid var(--primary-color);
+    text-align: left;
+    letter-spacing: 0.5px;
+}
+
+.onenote-data-table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.onenote-data-table tr:hover td {
+    background: rgba(212, 175, 55, 0.02);
+}
+
+.onenote-data-table td input.minimal-input,
+.onenote-data-table td select {
+    width: 100%;
+    border: 1px solid transparent;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--text-main);
+}
+
+.onenote-data-table td input.minimal-input:focus,
+.onenote-data-table td select:focus {
+    background: #fff !important;
+    border-color: var(--primary-color) !important;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(212, 175, 55, 0.1);
+}
+
+.total-charges {
+    max-width: 1000px;
+    margin: 15px auto;
+    text-align: right;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1rem;
+    padding-right: 15px;
+}
+
+/* --- SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* --- NOTE EDITOR BULLETS --- */
+.note-editor ul {
+    list-style-type: disc !important;
+    padding-left: 2rem !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.note-editor li {
+    display: list-item !important;
+    margin-bottom: 5px;
+}
+
+/* --- LOADING SCREEN --- */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.loading-logo-container {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.loading-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: logo-breathe 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+}
+
+@keyframes logo-breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+    }
+
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6));
+    }
+}
+
+.loading-text {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* --- PREMIUM SELECT DROPDOWN (BANK & BRANCH) --- */
+/* --- PREMIUM SELECT DROPDOWN (BANK & BRANCH) --- */
+.premium-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    /* Ensure full width in container */
+}
+
+.premium-label {
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-family: var(--font-heading);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.premium-select-wrapper {
+    position: relative;
+    width: 320px;
+    /* Slightly wider */
+    max-width: 100%;
+}
+
+.premium-input {
+    width: 100%;
+    padding: 14px 20px;
+    /* More padding */
+    border: 1px solid #e5e7eb;
+    border-bottom: 2px solid var(--border-gold);
+    /* distinct gold bottom */
+    border-radius: 12px;
+    background: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #111827;
+    /* Darker text */
+    text-align: left;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+    letter-spacing: 0.3px;
+}
+
+.premium-input::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.premium-input:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 15px -3px rgba(212, 175, 55, 0.15), 0 4px 6px -2px rgba(212, 175, 55, 0.1);
+}
+
+.premium-input:focus {
+    border-color: var(--primary-color);
+    background: #fffbf0;
+    /* Very subtle gold tint on focus */
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+    outline: none;
+}
+
+.premium-select-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    /* Always visible color */
+    pointer-events: none;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.premium-input:focus+.premium-select-icon {
+    opacity: 1;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Hide default browser arrow for datalists */
+.premium-input::-webkit-calendar-picker-indicator {
+    display: none !important;
+    opacity: 0 !important;
+}*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08! *cascade08!%*cascade08%' *cascade08'+*cascade08+- *cascade08-6 *cascade086=*cascade08=> *cascade08>F*cascade08F_ *cascade08_a*cascade08ab *cascade08bd*cascade08dj *cascade08jk*cascade08kn *cascade08no*cascade08ow*cascade08wz *cascade08z{*cascade08{ *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08	*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		*cascade08		 *cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		 *cascade08		*cascade08		*cascade08		*cascade08	
+ *cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+ *cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+
+*cascade08
+
+ *cascade08
+*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08*cascade08 *cascade08  *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08  *cascade08   *cascade08 !*cascade08!! *cascade08!!*cascade08!!*cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!! *cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!! *cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!! *cascade08!!*cascade08!! *cascade08!!*cascade08!!*cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!!*cascade08!! *cascade08!! *cascade08!"*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08""*cascade08"" *cascade08"#*cascade08## *cascade08##*cascade08## *cascade08##*cascade08## *cascade08## *cascade08##*cascade08## *cascade08##*cascade08## *cascade08#$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$ *cascade08$$*cascade08$$ *cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$ *cascade08$$ *cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$$*cascade08$$ *cascade08$%*cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%%*cascade08%% *cascade08%% *cascade08%%*cascade08%% *cascade08%&*cascade08&& *cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&& *cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&&*cascade08&& *cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&&*cascade08&&*cascade08&& *cascade08&&*cascade08&& *cascade08&&*cascade08&&*cascade08&&*cascade08&& *cascade08&&*cascade08&& *cascade08&& *cascade08&& *cascade08&'*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08''*cascade08'' *cascade08'' *cascade08'**cascade08** *cascade08** *cascade08** *cascade08***cascade08** *cascade08***cascade08** *cascade08** *cascade08*+ *cascade08++*cascade08++ *cascade08++ *cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08++*cascade08++ *cascade08+,*cascade08,, *cascade08,,*cascade08,, *cascade08,,*cascade08,, *cascade08,,*cascade08,, *cascade08,,*cascade08,, *cascade08,,*cascade08,, *cascade08,,*cascade08,- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-- *cascade08-- *cascade08--*cascade08-- *cascade08--*cascade08-. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08..*cascade08.. *cascade08./*cascade08// *cascade08//*cascade08// *cascade08//*cascade08// *cascade08//*cascade08// *cascade08/0*cascade0800 *cascade0800*cascade0800 *cascade0800*cascade0800 *cascade0800*cascade0800 *cascade0801*cascade0811 *cascade0811*cascade0811 *cascade0811*cascade0811 *cascade0811*cascade0811 *cascade0811*cascade0811 *cascade0812*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0822*cascade0822 *cascade0823*cascade0833 *cascade0833*cascade0834 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0844*cascade0844 *cascade0845*cascade0855 *cascade0855*cascade0855 *cascade0855*cascade0856 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0866 *cascade0866*cascade0867 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0877 *cascade0877*cascade0878 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0888 *cascade0888*cascade0889 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade0899 *cascade0899*cascade089; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;; *cascade08;;*cascade08;< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<<*cascade08<< *cascade08<< *cascade08<<*cascade08<< *cascade08<< *cascade08<<*cascade08<<*cascade08<< *cascade08<<*cascade08<<*cascade08<< *cascade08<= *cascade08==*cascade08== *cascade08==*cascade08=> *cascade08>> *cascade08>>*cascade08>> *cascade08>>*cascade08>> *cascade08>> *cascade08>?*cascade08?? *cascade08?? *cascade08?@*cascade08@@ *cascade08@@ *cascade08@@*cascade08@@ *cascade08@@*cascade08@@ *cascade08@@*cascade08@@ *cascade08@A*cascade08AA *cascade08AA *cascade08AA*cascade08AA *cascade08AA *cascade08AA*cascade08AA *cascade08AA *cascade08AA *cascade08AA*cascade08AA *cascade08AA*cascade08AA*cascade08AA *cascade08AA*cascade08AB *cascade08BB *cascade08BB*cascade08BB *cascade08BB*cascade08BB *cascade08BB*cascade08BB *cascade08BB *cascade08BB*cascade08BB *cascade08BB*cascade08BB *cascade08BB*cascade08BC *cascade08CC *cascade08CC*cascade08CC *cascade08CC*cascade08CC *cascade08CC *cascade08CC *cascade08CC*cascade08CC *cascade08CC *cascade08CC*cascade08CC *cascade08CC*cascade08CC *cascade08CC *cascade08CC*cascade08CC *cascade08CD*cascade08DD*cascade08DD *cascade08DD*cascade08DD *cascade08DD*cascade08DD *cascade08DD*cascade08DD *cascade08DD *cascade08DE*cascade08EE *cascade08EG*cascade08GG *cascade08GG *cascade08GG*cascade08GG *cascade08GG*cascade08GG *cascade08GG*cascade08GG *cascade08GG*cascade08GG *cascade08GG*cascade08GG *cascade08GH *cascade08HH*cascade08HI *cascade08II *cascade08II*cascade08II *cascade08II*cascade08II *cascade08II *cascade08II*cascade08II *cascade08II *cascade08IJ*cascade08JJ *cascade08JJ *cascade08JJ*cascade08JJ *cascade08JJ*cascade08JJ *cascade08JJ *cascade08JJ *cascade08JJ *cascade08JJ*cascade08JJ *cascade08JJ *cascade08JJ*cascade08JJ *cascade08JK*cascade08KK *cascade08KK *cascade08KK *cascade08KK*cascade08KK *cascade08KK *cascade08KL*cascade08LL *cascade08LL*cascade08LL *cascade08LL *cascade08LL*cascade08LL *cascade08LL*cascade08LL *cascade08LL *cascade08LL*cascade08LL *cascade08LL *cascade08LL*cascade08LL *cascade08LL*cascade08LL *cascade08LL*cascade08LL *cascade08LL*cascade08LL *cascade08LL *cascade08LL*cascade08LL *cascade08LL *cascade08LM *cascade08MM*cascade08MM *cascade08MM *cascade08MM*cascade08MM *cascade08MM*cascade08MM *cascade08MM*cascade08MM *cascade08MM *cascade08MM*cascade08MM *cascade08MM*cascade08MM *cascade08MM*cascade08MM *cascade08MM*cascade08MN *cascade08NN*cascade08NN *cascade08NN*cascade08NN *cascade08NN *cascade08NN *cascade08NN *cascade08NO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OO *cascade08OO*cascade08OP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PP *cascade08PP *cascade08PP*cascade08PP *cascade08PP*cascade08PQ *cascade08QQ*cascade08QQ *cascade08QQ *cascade08QQ *cascade08QQ*cascade08QQ *cascade08QQ*cascade08QQ *cascade08QQ*cascade08QQ *cascade08QQ*cascade08QQ *cascade08QQ *cascade08QQ *cascade08QQ*cascade08QR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RR*cascade08RR *cascade08RS*cascade08SS *cascade08SS*cascade08SS *cascade08SS*cascade08SS *cascade08SS *cascade08SS*cascade08SS *cascade08SS *cascade08SS*cascade08SS *cascade08SS *cascade08SS*cascade08SS *cascade08SS*cascade08SS *cascade08SS*cascade08SS *cascade08SS*cascade08ST *cascade08TT*cascade08TT *cascade08TT*cascade08TT *cascade08TT*cascade08TT *cascade08TT *cascade08TT*cascade08TU *cascade08UU*cascade08UU *cascade08UU *cascade08UU*cascade08UU *cascade08UU*cascade08UU *cascade08UU*cascade08UU *cascade08UU*cascade08UU *cascade08UU *cascade08UU*cascade08UU *cascade08UU *cascade08UU*cascade08UU *cascade08UU*cascade08UU *cascade08UV*cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV *cascade08VV*cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV *cascade08VV*cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VV*cascade08VV *cascade08VW*cascade08WW *cascade08WW*cascade08WW *cascade08WW *cascade08WW*cascade08WW *cascade08WW*cascade08WW *cascade08WW*cascade08WW *cascade08WW*cascade08WW *cascade08WW*cascade08WW *cascade08WW *cascade08WW*cascade08WW *cascade08WW *cascade08WW *cascade08WW*cascade08WW*cascade08WW *cascade08WW*cascade08WW *cascade08WW *cascade08WX*cascade08XX *cascade08XX*cascade08XX *cascade08XX *cascade08XX*cascade08XX *cascade08XX*cascade08XX *cascade08XX*cascade08XX *cascade08XX *cascade08XX *cascade08XX*cascade08XX *cascade08XX*cascade08XX *cascade08XX*cascade08XY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY *cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY *cascade08YY *cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YY *cascade08YY*cascade08YZ *cascade08ZZ *cascade08ZZ *cascade08ZZ *cascade08ZZ*cascade08ZZ *cascade08ZZ*cascade08ZZ *cascade08ZZ*cascade08ZZ *cascade08ZZ*cascade08ZZ *cascade08ZZZZ *cascade08ZZZZ *cascade08Z[[[ *cascade08[[ *cascade08[[*cascade08[[ *cascade08[[*cascade08[[ *cascade08[[ *cascade08[[[[ *cascade08[[ *cascade08[[[[ *cascade08[[[[ *cascade08
+[\ \] *cascade08]]]] *cascade08]]]] *cascade08]]]] *cascade08]]]] *cascade08]]]] *cascade08]]]] *cascade08]]]] *cascade08]^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^^^^ *cascade08^___ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08____ *cascade08__*cascade08__ *cascade08_`*cascade08`` *cascade08````*cascade08````*cascade08`` *cascade08`` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08```` *cascade08`aaa *cascade08aaaa *cascade08aaaa *cascade08aa *cascade08aa*cascade08aa *cascade08aa*cascade08aa *cascade08aa*cascade08aa *cascade08aa*cascade08aa *cascade08aa *cascade08aa*cascade08aa *cascade08aa *cascade08aa*cascade08aa *cascade08ab*cascade08bb *cascade08bb*cascade08bb *cascade08bb*cascade08bb *cascade08bb*cascade08bb *cascade08bbbb*cascade08bb *cascade08bbbb *cascade08bbbb *cascade08bbbb*cascade08bb *cascade08bb *cascade08bb*cascade08bbbb *cascade08bb *cascade08bb *cascade08bbbb *cascade08bb*cascade08bb *cascade08bb*cascade08bb *cascade08bb*cascade08bb *cascade08bb*cascade08bb *cascade08bccc *cascade08cc*cascade08cccc *cascade08cddd *cascade08dd*cascade08
+dd dd*cascade08dd *cascade08dd*cascade08dd *cascade08dd *cascade08dddd *cascade08dddd *cascade08
+dd dd*cascade08
+dd dd*cascade08de *cascade08ee*cascade08ee *cascade08ee*cascade08ee *cascade08ee*cascade08eeee *cascade08ee *cascade08
+ee 
+ee ee *cascade08eeee *cascade08efff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ffff *cascade08ff *cascade08ff*cascade08fg *cascade08gg *cascade08gg *cascade08gggg *cascade08gggg *cascade08gggg *cascade08gggg *cascade08gggg *cascade08gggg *cascade08gggg *cascade08ghhh *cascade08hhhh *cascade08hhhh *cascade08hhhh *cascade08hhhh *cascade08hiii *cascade08ii *cascade08ii *cascade08iiii *cascade08iiii *cascade08iiii *cascade08iiii *cascade08ii *cascade08iiii *cascade08iiii *cascade08iiii *cascade08ii *cascade08ii *cascade08ii *cascade08ijjj *cascade08jj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jjjj *cascade08jkkk *cascade08kkkk *cascade08kkkk *cascade08kkkk *cascade08kkkk *cascade08kkkk *cascade08kkkk *cascade08klll *cascade08ll*cascade08ll *cascade08ll*cascade08ll *cascade08llll *cascade08ll *cascade08ll*cascade08
+ll ll *cascade08ll*cascade08lm *cascade08mm*cascade08mn *cascade08no*cascade08oq *cascade08qq*cascade08qq *cascade08qs*cascade08ss *cascade08su *cascade08uv *cascade08vv*cascade08vv *cascade08vv*cascade08vw *cascade08ww*cascade08ww *cascade08ww*cascade08ww *cascade08ww*cascade08ww *cascade08ww*cascade08wx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xx *cascade08xx*cascade08xy *cascade08yy*cascade08yy *cascade08yy*cascade08yy *cascade08yy*cascade08yy *cascade08yz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08zz *cascade08zz*cascade08z{ *cascade08{{*cascade08{| *cascade08||*cascade08|| *cascade08||*cascade08|| *cascade08||*cascade08|| *cascade08||*cascade08|} *cascade08}}*cascade08}} *cascade08}}*cascade08}} *cascade08}}*cascade08}} *cascade08}}*cascade08}~ *cascade08~~*cascade08~~ *cascade08~*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08 *cascade08 *cascade08Հ *cascade08Հր *cascade08րڀ*cascade08ڀ݀ *cascade08݀ހ *cascade08ހ߀ *cascade08߀ *cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08 *cascade08Ӂ *cascade08Ӂف*cascade08ف *cascade08*cascade08 *cascade08 *cascade08 *cascade08*cascade08 *cascade08Ă Ăł*cascade08łȂ*cascade08Ȃ *cascade08 *cascade08 *cascade08ȃ ȃɃ*cascade08Ƀ߃ ߃*cascade08 *cascade08 *cascade08 *cascade08 *cascade08 *cascade08΄ ΄τ*cascade08τӄ ӄ *cascade08
+ *cascade08ĉ*cascade08ĉӉ *cascade08Ӊ׉*cascade08׉ *cascade08*cascade08 *cascade08
+ *cascade08
+ *cascade08
+ *cascade08
+ *cascade08  *cascade08  *cascade08  *cascade08 *cascade08Ɍ *cascade08
+Ɍʌʌ *cascade08
+ *cascade08
+
+ *cascade08ґ *cascade08ґ*cascade08 *cascade08ӓ*cascade08ӓ *cascade08*cascade08 *cascade08*cascade08Д *cascade08ДӔ*cascade08Ӕ *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08ʗ*cascade08ʗΗ *cascade08Ηܗ*cascade08ܗ *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08Ę *cascade08ĘƘ*cascade08Ƙ *cascade08*cascade08Ǚ *cascade08Ǚٙ*cascade08ٙۙ *cascade08ۙߙ*cascade08ߙ *cascade08*cascade08͚ *cascade08͚ך*cascade08ךښ *cascade08ښ*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08ǟ *cascade08ǟɟ*cascade08ɟ *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade08 *cascade08*cascade0825file:///c:/Users/ITS/Desktop/MTQ/assets/css/style.css

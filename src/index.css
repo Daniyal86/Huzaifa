@@ -1,0 +1,244 @@
+/* ==========================================================================
+   GLOBAL DESIGN SYSTEM & VARIABLES
+   ========================================================================== */
+:root {
+  /* Fonts */
+  --font-heading: 'Playfair Display', 'Plus Jakarta Sans', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Colors (Light Theme by Default) */
+  --bg-primary: #FAF9F6;      /* Off-white / Ivory */
+  --bg-secondary: #FFFFFF;    /* Pure White for Cards */
+  --border-color: #E2E8F0;    /* Slate-200 */
+  --text-main: #1E293B;       /* Slate-800 */
+  --text-muted: #64748B;      /* Slate-500 */
+  
+  /* Clinical Gold Palette */
+  --gold-primary: #D4AF37;    /* Classic Gold */
+  --gold-dark: #B5902B;
+  --gold-hover: #AA882C;
+  --gold-glow: rgba(212, 175, 55, 0.15);
+  --gold-border: rgba(212, 175, 55, 0.3);
+
+  /* Status Colors */
+  --success: #10B981;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+
+  /* Borders & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(212, 175, 55, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-primary: #0A0A0A;      /* Pure rich dark */
+  --bg-secondary: #121212;    /* Slightly lighter dark for cards */
+  --border-color: #1F1F1F;    /* Slate-800 equivalent */
+  --text-main: #F8FAFC;       /* Slate-50 */
+  --text-muted: #94A3B8;      /* Slate-400 */
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --gold-border: rgba(212, 175, 55, 0.4);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--bg-primary);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-main);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+/* Layout Containers */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+}
+
+/* ==========================================================================
+   COMMON PREMIUM COMPONENTS & STYLES
+   ========================================================================== */
+
+/* Gold Gradient Accented Text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Premium Card Glassmorphism effect */
+.premium-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  overflow: hidden;
+}
+
+.premium-card:hover {
+  border-color: var(--gold-border);
+  box-shadow: var(--shadow-md), 0 0 20px var(--gold-glow);
+  transform: translateY(-4px);
+}
+
+/* Pill / Badges */
+.badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-muted);
+  transition: var(--transition-smooth);
+}
+
+.badge-gold {
+  background-color: var(--gold-glow);
+  border-color: var(--gold-border);
+  color: var(--gold-dark);
+}
+
+[data-theme="dark"] .badge-gold {
+  color: var(--gold-primary);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-dark) 100%);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, var(--gold-hover) 0%, var(--gold-primary) 100%);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: var(--text-main);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  background-color: var(--gold-glow);
+}
+
+/* Profile Photo Framing - Essential for preventing facial cutoff */
+.profile-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--gold-primary);
+  box-shadow: var(--shadow-lg), 0 0 30px var(--gold-glow);
+  aspect-ratio: 1 / 1;
+}
+
+.profile-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%; /* Positions framing at upper 15% (head/face area) */
+  transition: var(--transition-smooth);
+}
+
+.profile-frame:hover img {
+  transform: scale(1.05);
+}
+
+/* Animations helpers */
+.perspective-container {
+  perspective: 1000px;
+}
